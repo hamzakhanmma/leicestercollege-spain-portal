@@ -1,0 +1,388 @@
+Build a fully responsive, modern, futuristic, and professional web application called:
+
+“Leicester College International Work Experience Portal”
+
+This is a digital portal prototype for Leicester College students travelling abroad for international work experience placements.
+
+The portal replaces paper booklets and printed trip information with one clean digital experience accessible through a shared link.
+
+The design must feel:
+
+futuristic
+premium
+clean
+smooth
+highly professional
+easy to navigate
+modern educational tech platform
+Apple + Notion + Stripe inspired UI
+responsive on desktop/mobile/tablet
+dark mode by default with subtle gradients and glassmorphism
+smooth animations and transitions
+accessible and beginner-friendly
+
+Use:
+
+React + Vite
+TailwindCSS
+Framer Motion
+Lucide React icons
+Local JSON storage or mock database
+Modern component structure
+Clean code architecture
+
+IMPORTANT:
+This is a polished prototype, not a backend-heavy production app.
+
+CORE WEBSITE STRUCTURE
+
+Create these pages/components:
+
+Landing Page / Dashboard
+Flight Information
+Transport Information
+Accommodation
+Keeping Safe
+Daily Itinerary
+Cultural Guide
+Reflective Diary
+Registration Confirmation
+FAQs
+Staff Editing Area
+Evaluation Form
+DESIGN REQUIREMENTS
+
+The website must include:
+
+animated hero section
+floating glassmorphism cards
+smooth page transitions
+sidebar navigation
+mobile hamburger menu
+sticky navigation
+modern typography
+gradient accents using Leicester College blue tones
+subtle particle/background glow effects
+professional icons
+timeline components
+interactive cards
+hover animations
+scroll animations
+futuristic dashboard feel
+
+Use the Leicester College logo branding colours:
+
+bright blue accents
+dark charcoal background
+white/light gray text
+glass effect cards
+
+Add:
+
+animated trip countdown
+weather widget placeholder
+interactive schedule cards
+modern dashboard widgets
+welcome section
+HOME PAGE CONTENT
+
+Hero section:
+“International Work Experience Portal”
+
+Subtitle:
+“Everything students, parents, and staff need in one place.”
+
+Buttons:
+
+Explore Portal
+Register Now
+
+Dashboard widgets:
+
+Countdown to Spain Trip
+Emergency Contact Quick Access
+Latest Updates
+Weather in Spain
+Upcoming Activities
+
+Include animated cards for:
+
+Flight details
+Safety information
+Accommodation
+Cultural preparation
+Reflective diary
+FLIGHT INFORMATION PAGE
+
+Include:
+
+airport meeting point
+luggage rules
+cabin bag dimensions
+check-in process
+travel checklist
+coach transfer information
+passport/GHIC reminders
+
+Display information using:
+
+cards
+timelines
+collapsible sections
+infographic-style layout
+TRANSPORT PAGE
+
+Show:
+
+coach travel
+airport transfer
+travel schedule
+placement transport
+maps placeholders
+travel safety reminders
+
+Include:
+
+animated route timeline
+transport cards
+ACCOMMODATION PAGE
+
+Display:
+
+accommodation expectations
+sharing rules
+curfew information
+cleaning responsibilities
+respect and behaviour guidance
+
+Use:
+
+interactive house rules cards
+expandable sections
+icons for each rule
+KEEPING SAFE PAGE
+
+This page must look extremely professional.
+
+Include:
+
+emergency numbers
+health and wellbeing guidance
+pickpocket safety
+scam warnings
+curfews
+check-in procedures
+hydration reminders
+sun safety
+emergency contact buttons
+
+Add:
+
+emergency quick action panel
+warning cards
+highlighted safety alerts
+DAILY ITINERARY PAGE
+
+Create:
+
+beautiful vertical timeline
+day-by-day schedule
+work placement timings
+Seville trip
+Cadiz/beach trip
+football/paddle activities
+Spanish lessons
+enrichment activities
+
+Use:
+
+animated timeline
+progress indicators
+expandable day sections
+CULTURAL GUIDE PAGE
+
+IMPORTANT:
+Even though the brief mentions Crete, this portal should use SPAIN / LEBRIJA content based on the provided preparation pack.
+
+Include:
+
+information about Spain
+information about Lebrija
+Spanish culture
+customs and traditions
+weather/climate
+geography
+basic Spanish phrases
+etiquette tips
+food guidance
+cultural expectations
+
+Create:
+
+interactive phrase cards
+clickable translations
+mini culture quiz
+animated cultural facts
+image placeholders for Spain
+
+Include phrases:
+
+Hola
+Gracias
+Adios
+Yo quiero
+Cuanto cuesta
+Can you help me?
+I do not understand
+REFLECTIVE DIARY PAGE
+
+Students must be able to:
+
+create diary entries
+upload photos
+save reflections locally
+view previous entries
+
+Include:
+
+title field
+text area
+mood selector
+photo upload
+timeline of entries
+
+Store data in:
+
+local storage or mock JSON database
+
+Design should feel similar to:
+
+Notion journaling system
+REGISTRATION PAGE
+
+Create:
+
+student full name field
+checkbox confirming they read the rules
+submit button
+confirmation success animation
+
+Text should state:
+“I confirm that I have read and understood the International Work Experience guidance and agree to follow the rules and expectations.”
+
+Store responses locally.
+
+EVALUATION FORM
+
+Create:
+
+rating sliders
+text feedback
+favourite activity selection
+improvement suggestions
+recommendation score
+
+Add modern UI elements:
+
+animated sliders
+progress completion
+success confirmation
+FAQ PAGE
+
+Accordion-style FAQs for:
+
+luggage
+food
+accommodation
+safety
+money
+transport
+work placement
+curfews
+internet/WiFi
+emergency situations
+STAFF EDITING AREA
+
+Create a simple admin-style page.
+
+Features:
+
+edit announcements
+upload/update documents
+update itinerary items
+add trip notices
+upload images
+preview updates live
+
+Use:
+
+modal forms
+editable cards
+local JSON state
+
+NO real authentication required.
+
+TECHNICAL REQUIREMENTS
+
+Use:
+
+React Router
+reusable components
+TailwindCSS utility styling
+Framer Motion animations
+Lucide React icons
+
+Must be:
+
+responsive
+cleanly structured
+professional
+smooth and modern
+
+Include:
+
+loading animations
+transitions
+hover effects
+local storage support
+reusable card components
+reusable modal components
+EXTRA FEATURES
+
+Add:
+
+trip countdown timer
+dark/light mode toggle
+search functionality
+notification banner
+floating quick-help button
+interactive progress tracker
+mobile-first responsiveness
+IMPORTANT FINAL INSTRUCTIONS
+
+This website must feel like a REAL professional educational travel portal.
+
+Prioritize:
+
+user experience
+futuristic visuals
+smooth animations
+clarity
+accessibility
+premium modern UI
+
+The final result should look like something a real college or startup would deploy.
+
+Generate:
+
+all pages
+all components
+all styling
+all sample data
+all routing
+fully working frontend prototype
+
+DO NOT generate placeholder lorem ipsum.
+Use realistic content related to the Spain work experience trip.
+
+Make the site visually impressive enough to stand out during a college presentation.
