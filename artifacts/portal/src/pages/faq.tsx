@@ -7,75 +7,51 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
+import { usePortalContent } from "@/lib/portal-content";
 
 export default function FAQ() {
-  const faqs = [
-    {
-      q: "Luggage",
-      a: "Max hold bag 20kg, cabin 55x40x20cm. No liquids over 100ml in cabin bag. Leave valuables at home."
-    },
-    {
-      q: "Food",
-      a: "All meals included at the residencia. Inform staff of allergies before departure. Local food is delicious — be open minded."
-    },
-    {
-      q: "Accommodation",
-      a: "Shared rooms. No guests allowed. Towels are provided but bring a beach towel."
-    },
-    {
-      q: "Safety",
-      a: "Keep emergency numbers saved. Share location with parents. Travel in groups after dark."
-    },
-    {
-      q: "Money",
-      a: "Bring €150–€200 spending money. Card payments accepted in most places. Inform your bank before travel so they don't block your card."
-    },
-    {
-      q: "Transport",
-      a: "All major trips are organised. Do not arrange private transport without informing staff."
-    },
-    {
-      q: "Work Placement",
-      a: "Smart casual dress unless uniform is provided. Be punctual. No phones during placement hours."
-    },
-    {
-      q: "Curfews",
-      a: "Weekdays 22:00, weekends 23:00. Missing curfew = parents and college contacted immediately."
-    },
-    {
-      q: "Internet/WiFi",
-      a: "Free WiFi at residencia. Data roaming costs money — buy a travel SIM or use WiFi calling when out and about."
-    },
-    {
-      q: "Emergency situations",
-      a: "Call 112 (EU emergency), then Mr Smith. Do not panic. Stay together."
-    }
-  ];
+  const { content } = usePortalContent();
+  const faqs = content.faq;
+
+  const categories = Array.from(new Set(faqs.map(f => f.category)));
 
   return (
-    <AnimatedPage className="space-y-8 max-w-3xl mx-auto">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Frequently Asked Questions</h1>
-        <p className="text-muted-foreground">Quick answers to common questions about the trip.</p>
-      </div>
+    <AnimatedPage className="space-y-8">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-950/20 via-background to-background border border-amber-500/10 shadow-2xl p-8 md:p-12 text-center">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(251,191,36,0.06),transparent_60%)] pointer-events-none" />
+        <div className="relative">
+          <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-6">
+            <HelpCircle className="w-8 h-8 text-amber-400" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-3">Frequently Asked Questions</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Everything you need to know before you go.</p>
+        </div>
+      </section>
 
-      <GlassCard className="p-2 sm:p-6 border-white/10">
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border-b-white/10">
-              <AccordionTrigger className="text-left font-semibold px-4 hover:no-underline hover:text-primary">
-                <div className="flex items-center gap-3">
-                  <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0" />
-                  {faq.q}
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed px-4 pb-4 pl-11">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </GlassCard>
+      {categories.map(category => {
+        const items = faqs.filter(f => f.category === category);
+        return (
+          <GlassCard key={category}>
+            <h2 className="text-lg font-bold mb-4 text-amber-400 uppercase tracking-widest text-sm">{category}</h2>
+            <Accordion type="single" collapsible className="space-y-2">
+              {items.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id}
+                  className="border border-white/8 rounded-xl px-4 bg-card/30 hover:bg-card/60 transition-colors"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline py-4">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </GlassCard>
+        );
+      })}
     </AnimatedPage>
   );
 }

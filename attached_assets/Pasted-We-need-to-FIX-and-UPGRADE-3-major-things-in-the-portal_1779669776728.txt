@@ -1,0 +1,250 @@
+We need to FIX and UPGRADE 3 major things in the portal.
+
+The website currently looks visually impressive, BUT there are still some major issues.
+
+---
+
+1. STAFF EDITING AREA SECURITY
+
+---
+
+Right now, ANYONE can access and edit the staff editing section.
+
+This MUST be fixed immediately.
+
+Create a proper protected staff access system.
+
+Requirements:
+
+* NO username required
+* ONLY a password field
+* Password should be:
+
+"leicestercollegespain"
+
+Behavior:
+
+* User clicks “Staff Access”
+* A sleek futuristic password modal appears
+* User enters password
+* If correct → access granted
+* If incorrect → animated error message
+
+Add:
+
+* smooth password unlock animation
+* premium admin login UI
+* glassmorphism modal
+* glowing input field
+* subtle security animations
+
+IMPORTANT:
+Do NOT use a real backend auth system.
+This is still a prototype.
+
+Use:
+
+* local authentication state
+* session/local storage
+* route protection
+
+The admin area must remain inaccessible unless password is entered correctly.
+
+---
+
+2. STAFF AREA MUST CONTROL THE ENTIRE WEBSITE
+
+---
+
+The current staff editing area is too limited.
+
+The staff/admin dashboard should become a COMPLETE portal management system.
+
+I need to be able to edit:
+
+* ALL text on EVERY page
+* announcements
+* countdown timer date
+* schedules
+* FAQ content
+* safety guidance
+* accommodation info
+* transport details
+* itinerary items
+* cultural content
+* emergency numbers
+* registration form text
+* evaluation form questions
+* dashboard widgets
+* images
+* hero sections
+* homepage content
+* trip updates
+* weather widget settings
+* notification banners
+* footer content
+* EVERY SINGLE CONTENT BLOCK
+
+Basically:
+The admin dashboard should control the ENTIRE portal dynamically.
+
+---
+
+## ADMIN DASHBOARD REQUIREMENTS
+
+Create a futuristic CMS-style admin dashboard.
+
+Include:
+
+* sidebar navigation
+* content management panels
+* live preview system
+* edit/save functionality
+* upload image system
+* visual editor cards
+* modular content editing
+* dynamic data storage
+
+Use:
+
+* JSON/local database structure
+* editable schemas
+* reusable content system
+
+Add sections like:
+
+* Homepage Editor
+* Flight Info Editor
+* Safety Editor
+* FAQ Editor
+* Cultural Guide Editor
+* Itinerary Editor
+* Countdown Editor
+* Announcement Manager
+* Media/Image Manager
+
+Everything should update instantly across the portal.
+
+---
+
+3. THE WEBSITE FEELS TOO MUCH LIKE SPACE / SCI-FI
+
+---
+
+The portal currently gives:
+❌ spaceship vibes
+❌ Mars vibes
+❌ cyberpunk-only vibes
+
+BUT THIS IS A SPAIN WORK EXPERIENCE PORTAL.
+
+The website needs MUCH MORE:
+
+* Spain vibes
+* Mediterranean vibes
+* travel vibes
+* cultural vibes
+* warm European vibes
+
+Keep the futuristic premium UI,
+BUT blend it with Spanish culture and travel aesthetics.
+
+---
+
+## MAKE IT FEEL LIKE SPAIN
+
+Add:
+
+* warm sunset gradients
+* Mediterranean color palettes
+* Spanish architecture inspiration
+* terracotta/orange/gold accents
+* beach/coastal visuals
+* palm tree silhouettes
+* Seville/Lebrija inspired imagery
+* Spain travel photography
+* tiled Spanish pattern elements
+* subtle flamenco-inspired design motifs
+* travel postcard aesthetics
+* modern European travel UI feel
+
+Use colors like:
+
+* warm oranges
+* sunset reds
+* Mediterranean blues
+* sandy beige tones
+* golden highlights
+
+Reduce:
+
+* overly neon cyberpunk
+* dark outer-space visuals
+* heavy sci-fi effects
+
+Keep:
+
+* premium animations
+* glassmorphism
+* smooth transitions
+* futuristic UI quality
+
+BUT combine them with:
+
+* Spain tourism energy
+* Erasmus/travel excitement
+* Mediterranean warmth
+* cultural immersion
+
+---
+
+## VISUAL REFERENCES / MOOD
+
+The final vibe should feel like:
+
+* premium Spain tourism app
+* luxury Mediterranean travel platform
+* modern Erasmus portal
+* futuristic travel dashboard
+* warm European summer aesthetic
+
+Think:
+“Futuristic international student portal inspired by Spain and Mediterranean travel.”
+
+NOT:
+“NASA student control center.”
+
+---
+
+## EXTRA VISUAL ADDITIONS
+
+Add:
+
+* animated Spain map routes
+* Seville/Lebrija travel sections
+* cultural image galleries
+* immersive travel cards
+* Spanish typography accents
+* modern postcard layouts
+* travel stamps/passport style UI elements
+* subtle airport/travel motion graphics
+
+The site should make users FEEL like they are about to travel to Spain.
+
+---
+
+## FINAL GOAL
+
+The portal should now feel:
+
+* futuristic
+* premium
+* warm
+* Mediterranean
+* immersive
+* exciting
+* cultural
+* travel-focused
+* presentation-worthy
+
+It should look like a REAL international travel experience platform made for students going to Spain.

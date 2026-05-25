@@ -18,12 +18,13 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
+import { usePortalContent } from "@/lib/portal-content";
 
 export default function Dashboard() {
   const [registration] = useLocalStorage("portal-registration", null);
   const [diary] = useLocalStorage("portal-diary", []);
+  const { content } = usePortalContent();
   
   const progressItems = [
     { label: "Registration Completed", done: !!registration },
@@ -37,10 +38,12 @@ export default function Dashboard() {
   return (
     <AnimatedPage className="space-y-8">
       {/* Hero Section */}
-      <section className="relative rounded-3xl overflow-hidden min-h-[70vh] flex flex-col justify-center p-8 md:p-16 border border-white/10 shadow-2xl bg-gradient-to-br from-card/80 via-background/60 to-primary/5">
+      <section className="relative rounded-3xl overflow-hidden min-h-[70vh] flex flex-col justify-center p-8 md:p-16 border border-white/10 shadow-2xl bg-gradient-to-br from-card/80 via-background/60 to-amber-950/10">
+        {/* Warm sunburst radial */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(251,191,36,0.06),transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 pointer-events-none">
-          {/* Slowly rotating abstract orb */}
-          <div className="absolute top-[10%] right-[10%] w-[180px] h-[180px] rounded-full bg-gradient-to-tr from-primary/30 to-cyan-400/20 blur-xl animate-rotate-slow"></div>
+          {/* Warm sunset orb */}
+          <div className="absolute top-[10%] right-[10%] w-[180px] h-[180px] rounded-full bg-gradient-to-tr from-amber-500/20 to-orange-500/10 blur-xl animate-rotate-slow"></div>
         </div>
 
         {/* Route animation SVG */}
@@ -117,10 +120,10 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Widgets Column */}
         <div className="lg:col-span-2 space-y-6">
-          <GlassCard className="text-center p-8 bg-gradient-to-br from-card/80 to-card border-primary/20 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
-            <h3 className="text-sm font-bold text-primary uppercase tracking-[0.3em] mb-10">Trip Countdown</h3>
-            <CountdownTimer targetDate="2025-07-14T06:30:00" />
+          <GlassCard className="text-center p-8 bg-gradient-to-br from-card/80 to-card border-amber-500/15 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-amber-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+            <h3 className="text-sm font-bold text-amber-400 uppercase tracking-[0.3em] mb-10">Trip Countdown</h3>
+            <CountdownTimer targetDate={content.meta.countdownDate} />
           </GlassCard>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -135,8 +138,9 @@ export default function Dashboard() {
                 <span className="text-xs font-bold text-foreground/80 bg-white/10 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md uppercase tracking-wider">Lebrija, Spain</span>
               </div>
               <div className="flex-1 flex flex-col items-center justify-center py-6 z-10">
-                <div className="text-7xl font-black tracking-tighter mb-2 drop-shadow-xl text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">34°<span className="text-muted-foreground/30 text-5xl">C</span></div>
-                <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(250,204,21,0.15)]">Sunny & Clear</div>
+                <div className="text-7xl font-black tracking-tighter mb-2 drop-shadow-xl text-transparent bg-clip-text bg-gradient-to-b from-amber-200 to-amber-400">{content.homepage.weatherTemp}°<span className="text-muted-foreground/30 text-5xl">C</span></div>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(251,191,36,0.15)]">{content.homepage.weatherCondition}</div>
+                <div className="text-xs text-muted-foreground mt-2">{content.homepage.weatherLocation}</div>
               </div>
             </GlassCard>
 
@@ -152,8 +156,8 @@ export default function Dashboard() {
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg leading-tight">Departure Meeting</h4>
-                    <p className="text-sm text-primary mt-1 font-medium tracking-wide">12 July, 14:00 • Room A14</p>
+                    <h4 className="font-bold text-lg leading-tight">{content.homepage.nextActivityTitle}</h4>
+                    <p className="text-sm text-amber-400 mt-1 font-medium tracking-wide">{content.homepage.nextActivityDate} • {content.homepage.nextActivityLocation}</p>
                   </div>
                 </div>
               </div>
@@ -193,6 +197,33 @@ export default function Dashboard() {
               ))}
             </div>
           </GlassCard>
+
+          {/* Destination Highlights */}
+          <div>
+            <h3 className="font-bold text-xl mb-4 tracking-tight flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-amber-400" /> Destination Highlights
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { icon: "🏛️", place: "Seville Cathedral", sub: "Seville, Spain", note: "45 min from Lebrija", color: "from-amber-950/40 to-card border-amber-500/20" },
+                { icon: "🏖️", place: "Playa de la Victoria", sub: "Cadiz, Spain", note: "Day trip: Sat 19 July", color: "from-sky-950/40 to-card border-sky-500/20" },
+                { icon: "🏘️", place: "Lebrija Town", sub: "Lebrija, Andalucía", note: "Your home for 2 weeks", color: "from-orange-950/40 to-card border-orange-500/20" },
+                { icon: "🥘", place: "Spanish Cuisine", sub: "Tapas & Gazpacho", note: "Authentic Andalucian food", color: "from-red-950/40 to-card border-red-500/20" },
+              ].map((card) => (
+                <motion.div
+                  key={card.place}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className={`rounded-2xl bg-gradient-to-br ${card.color} border p-4 cursor-default`}
+                >
+                  <div className="text-3xl mb-3">{card.icon}</div>
+                  <h4 className="font-bold text-sm leading-tight mb-1">{card.place}</h4>
+                  <p className="text-xs text-muted-foreground">{card.sub}</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1 italic">{card.note}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
           {/* Live Route Visual Section */}
           <GlassCard className="p-8 overflow-hidden relative">

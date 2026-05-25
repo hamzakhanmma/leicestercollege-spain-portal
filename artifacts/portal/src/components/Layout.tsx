@@ -39,33 +39,33 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-background text-foreground flex overflow-hidden selection:bg-primary/30 relative">
       {/* Dynamic background effect */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Animated grid overlay */}
+        {/* Animated grid overlay — warm amber tones */}
         <div 
-          className="absolute inset-0 opacity-50"
+          className="absolute inset-0 opacity-40"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,169,206,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,169,206,0.04) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(251,191,36,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(251,191,36,0.03) 1px, transparent 1px)`,
             backgroundSize: '60px 60px'
           }}
         />
         
-        {/* Scan-line sweep */}
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-scan-line" />
+        {/* Scan-line sweep — warm amber tint */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-400/20 to-transparent animate-scan-line" />
 
-        {/* Dramatic Orbs */}
+        {/* Warm Mediterranean Orbs */}
         <div 
-          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/15 blur-[150px] mix-blend-screen"
+          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-amber-500/8 blur-[150px] mix-blend-screen"
           style={{ animation: 'pulse 12s infinite alternate' }} 
         />
         <div 
-          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/8 blur-[120px] mix-blend-screen"
+          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-orange-600/6 blur-[120px] mix-blend-screen"
           style={{ animation: 'pulse 10s infinite alternate', animationDelay: '4s' }} 
         />
         <div 
-          className="absolute left-[40%] top-[30%] w-[200px] h-[200px] rounded-full bg-cyan-400/10 blur-[80px] mix-blend-screen"
+          className="absolute left-[40%] top-[30%] w-[200px] h-[200px] rounded-full bg-sky-400/8 blur-[80px] mix-blend-screen"
           style={{ animation: 'float 8s infinite alternate' }}
         />
 
-        {/* Particle Field */}
+        {/* Warm Particle Field — alternating amber and Mediterranean blue */}
         {particles.map(p => (
           <motion.div
             key={p.id}
@@ -75,8 +75,8 @@ export function Layout({ children }: { children: ReactNode }) {
               height: p.size,
               left: p.left,
               top: p.top,
-              backgroundColor: 'hsl(197, 100%, 60%)',
-              boxShadow: '0 0 6px 2px hsla(197, 100%, 60%, 0.4)',
+              backgroundColor: p.id % 2 === 0 ? 'rgba(251,191,36,0.5)' : 'rgba(14,165,233,0.5)',
+              boxShadow: p.id % 2 === 0 ? '0 0 6px 2px rgba(251,191,36,0.25)' : '0 0 6px 2px rgba(14,165,233,0.2)',
             }}
             animate={{
               y: [0, -30, 30, 0],
