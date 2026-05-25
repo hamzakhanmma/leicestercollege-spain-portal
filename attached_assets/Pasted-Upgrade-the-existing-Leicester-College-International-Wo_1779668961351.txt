@@ -1,0 +1,239 @@
+Upgrade the existing Leicester College International Work Experience Portal into a MUCH more visually advanced, immersive, futuristic, premium-quality experience.
+
+IMPORTANT:
+The current version looks good, but it still feels too empty and lacks:
+
+* graphics
+* illustrations
+* immersive visual elements
+* futuristic UI effects
+* cinematic transitions
+* animated backgrounds
+* high-end interactions
+* premium dashboard visuals
+
+I am now providing a NEW Leicester College logo.
+Replace ALL existing logos and branding with the newly uploaded logo everywhere across the site:
+
+* navbar
+* loading screens
+* hero sections
+* footer
+* login/registration areas
+* splash animations
+* favicon if possible
+
+---
+
+## VISUAL UPGRADE REQUIREMENTS
+
+Transform the website into something that feels like:
+
+* a futuristic international travel platform
+* a premium startup dashboard
+* an Apple event website
+* a next-generation student portal
+* an interactive cinematic experience
+
+The website should feel:
+
+* ultra modern
+* immersive
+* animated
+* high-tech
+* visually powerful
+* extremely polished
+
+---
+
+## ADD FUTURISTIC GRAPHICS
+
+Add:
+
+* futuristic SVG graphics
+* animated abstract shapes
+* floating glowing particles
+* animated gradient orbs
+* holographic UI elements
+* neon accent lines
+* animated background grids
+* world map graphics
+* floating Spain travel illustrations
+* glassmorphism overlays
+* subtle animated waves
+* animated light streaks
+* glowing dashboard cards
+* interactive hover distortions
+
+Create sections with:
+
+* layered depth
+* parallax scrolling
+* smooth motion effects
+* futuristic transitions
+
+---
+
+## ADD IMAGES & VISUAL CONTENT
+
+The site currently lacks imagery.
+
+Add:
+
+* high-quality Spain/Lebrija themed visuals
+* airport/travel imagery
+* student work placement visuals
+* accommodation visuals
+* cultural/travel photography
+* futuristic illustration assets
+* travel dashboard graphics
+
+Use:
+
+* modern gradient overlays
+* cinematic image treatments
+* hover zoom effects
+* image reveal animations
+* animated masks/transitions
+
+DO NOT use generic placeholder boxes.
+The site should feel visually rich and alive.
+
+---
+
+## ANIMATION REQUIREMENTS
+
+Make animations EXTREMELY smooth and premium.
+
+Add:
+
+* animated page transitions
+* loading animations
+* cinematic section reveals
+* mouse-follow glow effects
+* floating motion effects
+* animated navigation indicators
+* interactive cursor effects
+* staggered card animations
+* smooth scroll-triggered animations
+* glowing hover states
+* animated counters
+* animated timeline progress
+* 3D tilt card effects
+* subtle motion everywhere
+
+Use:
+
+* Framer Motion extensively
+* GSAP if needed
+* CSS keyframe animations
+* smooth easing curves
+
+Animations must feel:
+
+* fluid
+* premium
+* futuristic
+* responsive
+* satisfying
+
+---
+
+## MAKE THE HOMEPAGE CRAZY GOOD
+
+Completely redesign the homepage to feel cinematic.
+
+Add:
+
+* fullscreen hero section
+* animated globe/travel visual
+* moving gradients
+* immersive dashboard widgets
+* floating information panels
+* futuristic countdown timer
+* interactive stats
+* animated map routes from UK to Spain
+* live-style trip activity cards
+* dynamic background effects
+
+The homepage should instantly WOW people during presentations.
+
+---
+
+## UPGRADE THE DASHBOARD UI
+
+Turn the dashboard into a futuristic control center.
+
+Add:
+
+* glowing analytics cards
+* animated charts/graphs
+* live activity feed
+* progress trackers
+* interactive timelines
+* weather widgets
+* quick-access floating action buttons
+* dynamic trip status indicators
+
+Everything should feel interactive and alive.
+
+---
+
+## MODERNIZE EVERY PAGE
+
+Every page must feel visually unique and premium.
+
+Examples:
+
+* Safety page → cyber-alert style UI
+* Cultural guide → immersive Spain visuals and animated phrase cards
+* Itinerary → animated timeline with glowing route paths
+* Reflective diary → futuristic journaling interface
+* Staff area → premium admin dashboard
+* FAQ → animated accordion with glass effects
+
+---
+
+## ADD MICROINTERACTIONS
+
+Add tiny details everywhere:
+
+* button ripple effects
+* hover glow
+* animated shadows
+* icon motion
+* card lift effects
+* smooth scaling
+* animated underline indicators
+* smooth toggles
+* dynamic progress bars
+
+---
+
+## PERFORMANCE
+
+Despite all visuals and animations:
+
+* keep the site responsive
+* optimize animations
+* avoid lag
+* ensure smooth mobile performance
+
+---
+
+## FINAL GOAL
+
+The website should look like:
+“A futuristic premium international student travel platform built by a professional design agency.”
+
+It should feel:
+
+* unforgettable
+* visually insane
+* presentation-worthy
+* cinematic
+* modern
+* immersive
+* next-generation
+
+Make this look FAR beyond a normal college project.

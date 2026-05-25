@@ -15,7 +15,7 @@ import {
   Settings,
   LayoutDashboard
 } from "lucide-react";
-import logo from "@assets/download_1779668107472.png";
+import logo from "@assets/download__1_-removebg-preview_1779668985807.png";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -43,9 +43,14 @@ export function Sidebar({ isCollapsed, setIsCollapsed, isMobile, isOpen, setIsOp
   const [location] = useLocation();
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-sidebar border-r border-sidebar-border relative z-20">
+    <div className="flex flex-col h-full bg-gradient-to-b from-sidebar via-sidebar to-background/95 border-r border-sidebar-border relative z-20">
       <div className="p-4 flex items-center gap-3 border-b border-sidebar-border h-16 shrink-0">
-        <img src={logo} alt="Leicester College" className="h-8 w-8 object-contain shrink-0" />
+        <img 
+          src={logo} 
+          alt="Leicester College" 
+          className="h-9 w-auto max-w-[120px] object-contain shrink-0" 
+          style={{ filter: 'drop-shadow(0 0 8px rgba(0,169,206,0.4))' }}
+        />
         {(!isCollapsed || isMobile) && (
           <motion.span 
             initial={{ opacity: 0 }}
@@ -65,20 +70,26 @@ export function Sidebar({ isCollapsed, setIsCollapsed, isMobile, isOpen, setIsOp
             <Link key={item.href} href={item.href} onClick={() => isMobile && setIsOpen(false)}>
               <div
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer group relative",
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer group relative overflow-hidden",
                   isActive 
-                    ? "text-primary-foreground bg-primary shadow-[0_0_15px_rgba(0,169,206,0.3)]" 
+                    ? "text-primary-foreground bg-primary shadow-[0_0_20px_rgba(0,169,206,0.25)]" 
                     : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
                 )}
               >
-                <item.icon className={cn("h-5 w-5 shrink-0", isActive ? "text-primary-foreground" : "text-sidebar-foreground/70 group-hover:text-primary")} />
+                {!isActive && (
+                  <motion.div 
+                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary opacity-0 group-hover:opacity-100"
+                    layoutId="nav-hover-bar"
+                  />
+                )}
+                <item.icon className={cn("h-5 w-5 shrink-0 z-10", isActive ? "text-primary-foreground" : "text-sidebar-foreground/70 group-hover:text-primary")} />
                 {(!isCollapsed || isMobile) && (
-                  <span className="font-medium truncate">{item.label}</span>
+                  <span className="font-medium truncate z-10">{item.label}</span>
                 )}
                 {isActive && (
                   <motion.div 
                     layoutId="sidebar-active"
-                    className="absolute inset-0 rounded-lg bg-primary -z-10"
+                    className="absolute inset-0 rounded-lg bg-primary z-0"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
@@ -88,23 +99,40 @@ export function Sidebar({ isCollapsed, setIsCollapsed, isMobile, isOpen, setIsOp
         })}
 
         <div className="mt-auto pt-4">
+          <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent mb-4 shadow-[0_0_10px_rgba(0,169,206,0.5)]" />
           <Link href="/staff" onClick={() => isMobile && setIsOpen(false)}>
             <div className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer group relative overflow-hidden",
                 location === "/staff"
-                  ? "text-primary-foreground bg-primary" 
+                  ? "text-primary-foreground bg-primary shadow-[0_0_20px_rgba(0,169,206,0.25)]" 
                   : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               )}>
-              <Settings className="h-5 w-5 shrink-0" />
+              {!isActiveStaff && (
+                  <motion.div 
+                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary opacity-0 group-hover:opacity-100"
+                    layoutId="nav-hover-bar"
+                  />
+                )}
+              <Settings className={cn("h-5 w-5 shrink-0 z-10", isActiveStaff ? "text-primary-foreground" : "text-sidebar-foreground/70 group-hover:text-primary")} />
               {(!isCollapsed || isMobile) && (
-                <span className="font-medium">Staff Area</span>
+                <span className="font-medium z-10">Staff Area</span>
               )}
             </div>
           </Link>
         </div>
+        
+        {(!isCollapsed || isMobile) && (
+          <div className="mt-4 px-3 py-2 bg-white/5 border border-white/10 rounded-lg flex items-center gap-2 justify-center">
+            <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span className="text-xs font-semibold tracking-wide text-foreground/80 uppercase">Trip Active</span>
+            <span className="text-xs text-muted-foreground ml-auto">Spain '25</span>
+          </div>
+        )}
       </div>
     </div>
   );
+
+  const isActiveStaff = location === "/staff";
 
   if (isMobile) {
     return (
