@@ -1,21 +1,9 @@
 import { AnimatedPage } from "@/components/AnimatedPage";
 import { GlassCard } from "@/components/GlassCard";
+import { usePortalContent } from "@/lib/portal-content";
 import { Map, ThermometerSun, Utensils, Users, CheckCircle2, XCircle, Volume2 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const phrases = [
-  { es: "Hola", en: "Hello", pron: "OH-lah" },
-  { es: "Gracias", en: "Thank you", pron: "GRAH-thee-ahs" },
-  { es: "Adiós", en: "Goodbye", pron: "ah-DYOS" },
-  { es: "Por favor", en: "Please", pron: "por fah-VOR" },
-  { es: "¿Cuánto cuesta?", en: "How much?", pron: "KWAN-to KWES-tah" },
-  { es: "¿Puede ayudarme?", en: "Can you help me?", pron: "PWEH-deh ah-yoo-DAR-meh" },
-  { es: "No entiendo", en: "I don't understand", pron: "no en-TYEN-doh" },
-  { es: "¿Habla inglés?", en: "Do you speak English?", pron: "AH-blah een-GLES" },
-  { es: "¿Dónde está el baño?", en: "Where is the bathroom?", pron: "DON-deh es-TAH el BAHN-yo" },
-  { es: "Me llamo...", en: "My name is...", pron: "meh YAH-moh" },
-];
 
 const quizQuestions = [
   {
@@ -39,21 +27,35 @@ function FlipCard({ es, en, pron }: { es: string; en: string; pron: string }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
-    <div 
-      className="relative h-32 w-full cursor-pointer perspective-[1000px] group"
+    <div
+      className="relative h-36 w-full cursor-pointer group"
+      style={{ perspective: '1000px' }}
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
-        className="w-full h-full relative preserve-3d"
+        className="w-full h-full relative"
+        style={{ transformStyle: 'preserve-3d' }}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
       >
-        <div className="absolute inset-0 backface-hidden bg-card/60 backdrop-blur-xl border border-white/10 rounded-xl flex items-center justify-center p-4 text-center shadow-lg group-hover:border-primary/30 transition-colors">
-          <span className="font-black text-2xl text-primary drop-shadow-[0_0_10px_rgba(0,169,206,0.3)]">{en}</span>
+        {/* FRONT — English */}
+        <div
+          className="absolute inset-0 bg-card/80 backdrop-blur-xl border border-border rounded-2xl flex flex-col items-center justify-center p-4 text-center shadow-lg group-hover:border-primary/40 transition-colors"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
+          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">English · tap to flip</span>
+          <span className="font-black text-2xl text-foreground">{en}</span>
         </div>
-        <div className="absolute inset-0 backface-hidden bg-primary/20 border border-primary/30 rounded-xl flex flex-col items-center justify-center p-4 text-center shadow-[0_0_20px_rgba(0,169,206,0.2)] rotate-y-180">
-          <span className="font-black text-2xl text-foreground mb-1">{es}</span>
-          <span className="text-xs font-mono text-primary/80 flex items-center gap-1"><Volume2 className="h-3 w-3"/> {pron}</span>
+        {/* BACK — Spanish */}
+        <div
+          className="absolute inset-0 bg-primary/10 border border-primary/40 rounded-2xl flex flex-col items-center justify-center p-4 text-center"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+        >
+          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">Español</span>
+          <span className="font-black text-2xl text-primary">{es}</span>
+          <span className="text-xs font-mono text-muted-foreground mt-2 flex items-center gap-1">
+            <Volume2 className="h-3 w-3" /> {pron}
+          </span>
         </div>
       </motion.div>
     </div>
@@ -139,6 +141,7 @@ function Quiz() {
 }
 
 export default function Culture() {
+  const { content } = usePortalContent();
   return (
     <AnimatedPage className="space-y-10">
       {/* Hero Banner */}
@@ -151,8 +154,8 @@ export default function Culture() {
            </svg>
         </div>
         <div className="relative z-10 text-center px-6">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4 text-amber-100 drop-shadow-lg">Cultural Guide</h1>
-          <p className="text-xl text-amber-200/80 font-medium max-w-2xl mx-auto">Immerse yourself in the rhythms, flavors, and traditions of Andalucia.</p>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4 text-foreground dark:text-amber-100 drop-shadow-lg">Cultural Guide</h1>
+          <p className="text-xl text-muted-foreground dark:text-amber-200/80 font-medium max-w-2xl mx-auto">Immerse yourself in the rhythms, flavors, and traditions of Andalucia.</p>
         </div>
       </section>
 
@@ -224,7 +227,7 @@ export default function Culture() {
           <p className="text-lg text-primary font-medium">Click a card to reveal the translation & pronunciation.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {phrases.map((p, i) => (
+          {content.culture.phrases.map((p, i) => (
             <FlipCard key={i} es={p.es} en={p.en} pron={p.pron} />
           ))}
         </div>

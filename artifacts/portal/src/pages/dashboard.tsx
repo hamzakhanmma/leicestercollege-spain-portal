@@ -65,10 +65,10 @@ export default function Dashboard() {
         <div className="relative z-10 max-w-4xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 shadow-lg">
             <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(0,169,206,0.8)]"></span>
-            <span className="text-sm font-bold text-foreground/90 tracking-[0.15em] uppercase">Lebrija, Spain 2025</span>
+            <span className="text-sm font-bold text-foreground/90 tracking-[0.15em] uppercase">{content.meta.tripName}</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/40 leading-[1.1]">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 text-foreground dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-white dark:via-white/90 dark:to-white/40 leading-[1.1]">
             <motion.div
               variants={{
                 hidden: { opacity: 0 },

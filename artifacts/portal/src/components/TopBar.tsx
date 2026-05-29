@@ -1,15 +1,16 @@
+import { useState, useEffect } from "react";
 import { Menu, Search, Bell, Moon, Sun } from "lucide-react";
 import { useLocation } from "wouter";
 import { useTheme } from "./theme-provider";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "./ui/badge";
+import { SearchModal } from "./SearchModal";
 
 interface TopBarProps {
   toggleSidebar: () => void;
@@ -35,27 +36,45 @@ export function TopBar({ toggleSidebar }: TopBarProps) {
   const [location] = useLocation();
   const { theme, setTheme } = useTheme();
   const title = pageTitles[location] || "Portal";
+  const [searchOpen, setSearchOpen] = useState(false);
   const [announcements] = useLocalStorage("portal-announcements", [
     { id: "1", text: "Departure meeting confirmed for 12 July — Room A14", date: new Date().toISOString() }
   ]);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(o => !o);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   return (
-    <header className="h-16 shrink-0 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-30 px-4 flex items-center justify-between gap-4">
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={toggleSidebar} className="md:hidden">
-          <Menu className="h-5 w-5" />
-        </Button>
-        <h1 className="text-lg font-bold tracking-tight">{title}</h1>
-      </div>
+    <>
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <header className="h-16 shrink-0 border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-30 px-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="md:hidden">
+            <Menu className="h-5 w-5" />
+          </Button>
+          <h1 className="text-lg font-bold tracking-tight">{title}</h1>
+        </div>
 
       <div className="flex items-center gap-2 flex-1 justify-end">
-        <div className="relative hidden md:block max-w-xs w-full">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder="Search portal..." 
-            className="pl-9 bg-card/50 border-white/10 h-9 rounded-full focus-visible:ring-primary"
-          />
-        </div>
+        <button
+          onClick={() => setSearchOpen(true)}
+          className="relative hidden md:flex items-center max-w-xs w-full h-9 rounded-full bg-card/50 border border-border hover:border-primary/40 hover:bg-card transition-colors px-3 gap-2 text-muted-foreground text-sm"
+        >
+          <Search className="h-4 w-4 flex-shrink-0" />
+          <span className="flex-1 text-left">Search portal...</span>
+          <kbd className="text-xs bg-muted border border-border px-1.5 py-0.5 rounded hidden lg:block">⌘K</kbd>
+        </button>
+        <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSearchOpen(true)}>
+          <Search className="h-5 w-5" />
+        </Button>
 
         <Popover>
           <PopoverTrigger asChild>
@@ -94,7 +113,8 @@ export function TopBar({ toggleSidebar }: TopBarProps) {
         >
           {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
-      </div>
-    </header>
+        </div>
+      </header>
+    </>
   );
 }

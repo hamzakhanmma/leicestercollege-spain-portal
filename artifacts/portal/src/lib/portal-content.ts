@@ -1,8 +1,11 @@
+import { useEffect, useRef } from "react";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export interface PortalContent {
   meta: {
     tripName: string;
+    tripYear: string;
+    academicYear: string;
     countdownDate: string;
     departureDetails: string;
   };
@@ -92,6 +95,8 @@ export interface PortalContent {
 export const DEFAULT_CONTENT: PortalContent = {
   meta: {
     tripName: "Lebrija, Spain 2025",
+    tripYear: "2025",
+    academicYear: "2024/25",
     countdownDate: "2025-07-14T06:30:00",
     departureDetails: "Leicester College to East Midlands Airport"
   },
@@ -213,7 +218,12 @@ export const DEFAULT_CONTENT: PortalContent = {
       { es: "No entiendo", en: "I don't understand", pron: "no en-TYEN-doh" },
       { es: "¿Habla inglés?", en: "Do you speak English?", pron: "AH-blah een-GLES" },
       { es: "¿Dónde está el baño?", en: "Where is the bathroom?", pron: "DON-deh es-TAH el BAHN-yo" },
-      { es: "Me llamo...", en: "My name is...", pron: "meh YAH-moh" }
+      { es: "Me llamo...", en: "My name is...", pron: "meh YAH-moh" },
+      { es: "Lo siento", en: "I'm sorry", pron: "loh SYEN-toh" },
+      { es: "¿Dónde está...?", en: "Where is...?", pron: "DON-deh es-TAH" },
+      { es: "Buenos días", en: "Good morning", pron: "BWEH-nos DEE-ahs" },
+      { es: "Buenas noches", en: "Good night", pron: "BWEH-nahs NO-chesh" },
+      { es: "¿Hablas inglés?", en: "Do you speak English?", pron: "AH-blahs een-GLES" },
     ],
     facts: [],
     foodGuide: "Jamón, gazpacho, churros, tapas. Dinner is late (21:00+). Breakfast is light."
@@ -231,18 +241,42 @@ export const DEFAULT_CONTENT: PortalContent = {
     { id: "10", category: "Emergency", question: "Emergency situations", answer: "Call 112 (EU emergency), then Mr Smith. Do not panic. Stay together." }
   ],
   registration: {
-    confirmationText: "Please confirm your registration",
-    successHeadline: "Registration Complete",
-    successMessage: "You are all set for the trip."
+    confirmationText: "I confirm that I have read and understood the International Work Experience guidance and agree to follow all rules and expectations set by Leicester College and the host organisation.",
+    successHeadline: "Welcome to Spain!",
+    successMessage: "You are officially registered for the Leicester College International Work Experience."
   },
   evaluation: {
     activities: ["Work placement", "Seville Trip", "Cadiz Trip", "Cooking Class"]
   }
 };
 
+const API_BASE = "/api";
+
 export function usePortalContent() {
   const [stored, setStored] = useLocalStorage<Partial<PortalContent>>("portal-cms-content", {});
-  
+  const storedRef = useRef(stored);
+  storedRef.current = stored;
+
+  useEffect(() => {
+    const sync = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/content`);
+        if (res.ok) {
+          const data = await res.json() as { content: Partial<PortalContent> | null };
+          if (data.content && Object.keys(data.content).length > 0) {
+            setStored(data.content);
+          }
+        }
+      } catch {
+        // Offline — use localStorage cache
+      }
+    };
+    sync();
+    const t = setInterval(sync, 30_000);
+    return () => clearInterval(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const content: PortalContent = {
     ...DEFAULT_CONTENT,
     ...stored,
@@ -256,18 +290,32 @@ export function usePortalContent() {
     registration: { ...DEFAULT_CONTENT.registration, ...(stored.registration || {}) },
     evaluation: { ...DEFAULT_CONTENT.evaluation, ...(stored.evaluation || {}) }
   };
-  
-  const updateContent = (section: keyof PortalContent, value: any) => {
-    setStored(prev => ({ ...prev, [section]: value }));
+
+  const pushToServer = (next: Partial<PortalContent>) => {
+    fetch(`${API_BASE}/content`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: next }),
+    }).catch(() => {/* will retry on next poll */});
   };
-  
+
+  const updateContent = (section: keyof PortalContent, value: unknown) => {
+    const next = { ...storedRef.current, [section]: value };
+    setStored(next);
+    pushToServer(next);
+  };
+
   const resetSection = (section: keyof PortalContent) => {
-    setStored(prev => {
-      const next = { ...prev };
-      delete next[section as keyof typeof next];
-      return next;
-    });
+    const next = { ...storedRef.current };
+    delete next[section as keyof typeof next];
+    setStored(next);
+    pushToServer(next);
   };
-  
-  return { content, updateContent, resetSection, setStored };
+
+  const setAllContent = (value: Partial<PortalContent>) => {
+    setStored(value);
+    pushToServer(value);
+  };
+
+  return { content, updateContent, resetSection, setStored: setAllContent };
 }

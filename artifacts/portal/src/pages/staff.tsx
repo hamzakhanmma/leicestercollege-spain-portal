@@ -170,6 +170,18 @@ function TripSettingsTab({ content, updateContent }: { content: any; updateConte
         </Field>
         <Field label="Departure Details"><Input value={form.departureDetails} onChange={e => set("departureDetails", e.target.value)} /></Field>
       </GlassCard>
+      <GlassCard className="space-y-4">
+        <h3 className="font-semibold border-b border-white/10 pb-2 text-foreground">Year Settings</h3>
+        <p className="text-xs text-muted-foreground">Changing the year updates it automatically everywhere across the portal.</p>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Trip Year (e.g. 2025)">
+            <Input value={form.tripYear || ""} onChange={e => set("tripYear", e.target.value)} placeholder="2025" />
+          </Field>
+          <Field label="Academic Year (e.g. 2024/25)">
+            <Input value={form.academicYear || ""} onChange={e => set("academicYear", e.target.value)} placeholder="2024/25" />
+          </Field>
+        </div>
+      </GlassCard>
       <SaveBtn onClick={save} />
     </div>
   );

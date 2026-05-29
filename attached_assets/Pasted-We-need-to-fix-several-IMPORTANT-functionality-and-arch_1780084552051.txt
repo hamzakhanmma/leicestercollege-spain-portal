@@ -1,0 +1,385 @@
+We need to fix several IMPORTANT functionality and architecture issues across the portal.
+
+The portal looks visually excellent now, but these bugs and missing systems are preventing it from behaving like a real-world platform.
+
+---
+
+1. GLOBAL YEAR MANAGEMENT SYSTEM
+
+---
+
+Right now the portal still references 2025/2026 manually in different places.
+
+This MUST become dynamic.
+
+Create a GLOBAL YEAR SYSTEM inside the Staff Editing Dashboard.
+
+Requirements:
+
+* Add a “Portal Year Settings” section in admin.
+* Admin can change:
+
+  * current academic year
+  * trip year
+  * portal version year
+
+Example:
+If admin changes year from:
+2026 → 2027
+
+It should automatically update EVERYWHERE across the ENTIRE portal instantly.
+
+This includes:
+
+* homepage
+* titles
+* countdown labels
+* trip info
+* footer
+* forms
+* cultural guide
+* admin dashboard
+* schedules
+* metadata
+* registration pages
+* evaluation forms
+* anywhere the year appears
+
+Implementation:
+
+* central global settings object
+* shared database state
+* no hardcoded years anywhere
+
+---
+
+2. REGISTRATION PAGE CRASH BUG
+
+---
+
+CRITICAL BUG:
+
+On the registration page:
+
+* when user ticks the confirmation checkbox
+* the page suddenly goes black/crashes.
+
+This must be fixed completely.
+
+Likely causes:
+
+* bad state update
+* infinite rerender
+* broken checkbox event
+* undefined form state
+* conditional rendering issue
+
+Requirements:
+
+* checkbox must function smoothly
+* no crashes
+* form validation should work properly
+* submit button should activate correctly
+* add graceful error handling
+
+Add:
+
+* loading state
+* success confirmation animation
+* validation messages
+* proper state management
+
+---
+
+3. LIGHT MODE TEXT VISIBILITY BUG
+
+---
+
+This bug STILL exists.
+
+When switching to light mode:
+
+* many fonts remain white
+* backgrounds become white/light
+* content becomes unreadable
+
+This needs a FULL theme-system audit.
+
+Requirements:
+
+* ALL components must fully support dark/light themes
+* text colors must dynamically adapt
+* no hardcoded white text
+* use semantic theme tokens/classes
+
+Audit ALL pages:
+
+* homepage
+* hero sections
+* cards
+* admin dashboard
+* forms
+* FAQ
+* cultural guide
+* timelines
+* buttons
+* modals
+* widgets
+* overlays
+* footer
+* navbar
+
+Use:
+
+* CSS variables
+* Tailwind theme-aware utilities
+* proper dark/light color mapping
+
+Ensure:
+
+* strong readability
+* premium appearance
+* accessibility contrast standards
+
+---
+
+4. CULTURAL GUIDE PHRASE CARDS BUG
+
+---
+
+The interactive Spanish phrase cards are broken.
+
+Current behavior:
+
+* clicking cards just flips/repeats the same text
+
+Expected behavior:
+
+* clicking should reveal the ACTUAL Spanish translation
+
+Example:
+
+Front:
+“Hello”
+
+Back:
+“Hola”
+
+Front:
+“Thank you”
+
+Back:
+“Gracias”
+
+Front:
+“Can you help me?”
+
+Back:
+“¿Puedes ayudarme?”
+
+Requirements:
+
+* proper flashcard functionality
+* smooth flip animation
+* front/back card logic fixed
+* realistic Spanish translations
+* mobile-friendly interaction
+
+Add:
+
+* pronunciation button
+* hover glow effects
+* audio placeholder support
+
+---
+
+5. SEARCH BAR HAS NO FUNCTION
+
+---
+
+Currently the search bar is fake/non-functional.
+
+We need REAL portal-wide search.
+
+Requirements:
+
+* search entire portal content
+* instantly filter relevant sections/pages
+* searchable:
+
+  * FAQs
+  * safety info
+  * itinerary
+  * accommodation
+  * cultural guide
+  * forms
+  * transport
+  * announcements
+  * dashboard content
+
+Features:
+
+* live search suggestions
+* fuzzy matching
+* highlighted search terms
+* “No results” state
+* keyboard accessibility
+* mobile responsive
+
+Add:
+
+* animated dropdown results
+* modern search experience
+* smooth transitions
+
+---
+
+6. MAJOR ISSUE: WEBSITE DATA IS ONLY LOCAL
+
+---
+
+THIS IS THE BIGGEST ISSUE.
+
+Currently:
+
+* if I edit content from the Staff Editing Dashboard on MY device
+* the changes ONLY appear on MY device.
+
+Other devices/users DO NOT see the updates.
+
+This means:
+
+* the portal is still using localStorage/local-only state
+* there is NO real shared database/backend.
+
+THIS MUST CHANGE.
+
+---
+
+## WE NEED A REAL DATABASE + BACKEND
+
+Connect the portal to a REAL backend/database.
+
+Requirements:
+
+* edits from admin panel sync across ALL devices
+* global persistent data
+* live shared content system
+
+Recommended stack:
+
+* Supabase (preferred because simple)
+  OR
+* Firebase
+
+Preferred:
+SUPABASE
+
+---
+
+## SUPABASE IMPLEMENTATION
+
+Set up:
+
+* Supabase project integration
+* database tables
+* API connection
+* realtime syncing if possible
+
+Store:
+
+* portal settings
+* homepage content
+* countdown dates
+* announcements
+* FAQs
+* cultural guide content
+* itinerary data
+* registration submissions
+* evaluation submissions
+* admin edits
+* uploaded images
+* all editable portal content
+
+Requirements:
+
+* all admin edits persist globally
+* refreshing page keeps changes
+* other devices instantly see updates
+* website becomes truly hosted/shared
+
+---
+
+## DATABASE ARCHITECTURE
+
+Create:
+
+* centralized content management schema
+* reusable editable content structure
+* global settings table
+* modular page content tables
+
+Suggested structure:
+
+* settings
+* homepage_content
+* faq_items
+* announcements
+* itinerary
+* cultural_phrases
+* registrations
+* evaluations
+* media_assets
+
+---
+
+## ADMIN DASHBOARD UPGRADE
+
+Update admin dashboard so it:
+
+* edits live database content
+* saves changes globally
+* previews updates instantly
+* handles loading/error states
+* uploads images properly
+
+Add:
+
+* save confirmation toasts
+* autosave support
+* optimistic UI updates
+* proper async handling
+
+---
+
+## IMPORTANT
+
+Do NOT break the existing futuristic Spain-inspired UI.
+
+Keep:
+
+* Mediterranean vibes
+* premium animations
+* modern visuals
+* glassmorphism
+* travel aesthetic
+
+BUT make the portal now behave like a REAL online platform.
+
+---
+
+## FINAL GOAL
+
+The portal should now:
+
+* function properly
+* sync globally across devices
+* support real-time admin editing
+* have working search
+* have working phrase cards
+* have working forms
+* support dynamic years
+* have fully working themes
+* behave like a production-quality web platform
+
+This should now feel like a REAL international student travel portal deployed publicly online.
